@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class building : MonoBehaviour
 {
-    private float health;
+    public float health;
     private string name;
     public GameObject myPrefab;
 
