@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1157726651308067002}
   - component: {fileID: 114777507427628610}
   - component: {fileID: 1338063336}
-  - component: {fileID: 3960674636380801974}
+  - component: {fileID: 58596364654693124}
   m_Layer: 0
   m_Name: bot-1
   m_TagString: Bot
@@ -98,8 +98,9 @@ MonoBehaviour:
   body: 100
   legs: 100
   name: Bot
-  isChoosed: 0
   moveSpeed: 20
+  selectionBorderImage: {fileID: 21300000, guid: e4392f1eb81da2a4791ce05872539e77,
+    type: 3}
 --- !u!50 &1338063336
 Rigidbody2D:
   serializedVersion: 4
@@ -121,8 +122,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!60 &3960674636380801974
-PolygonCollider2D:
+--- !u!58 &58596364654693124
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -134,33 +135,6 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 0.16, y: 0.16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.17922872, y: 0.31803048}
-      - {x: -0.17741767, y: 0.06663573}
-      - {x: -0.31665036, y: 0.004273176}
-      - {x: -0.38117707, y: -0.063191414}
-      - {x: -0.37881273, y: -0.18550754}
-      - {x: -0.31389487, y: -0.2518599}
-      - {x: -0.31362367, y: -0.43677115}
-      - {x: -0.117596276, y: -0.4367485}
-      - {x: -0.056786463, y: -0.3169675}
-      - {x: 0.061731312, y: -0.31017327}
-      - {x: 0.11951828, y: -0.43796492}
-      - {x: 0.3180847, y: -0.43493485}
-      - {x: 0.3195398, y: -0.24862146}
-      - {x: 0.387235, y: -0.19445801}
-      - {x: 0.37467235, y: -0.055496693}
-      - {x: 0.30954108, y: 0.006001115}
-      - {x: 0.19809604, y: 0.05882919}
-      - {x: 0.19577128, y: 0.30975914}
+  m_Offset: {x: 0.004326403, y: -0.067059994}
+  serializedVersion: 2
+  m_Radius: 0.35939032
