@@ -18,7 +18,6 @@ public class BotMove : MonoBehaviour
 
     public Sprite selectionBorderImage;
 
-    // Start is called before the first frame update
     void Start()
     {
         InitSelectionBorder();
