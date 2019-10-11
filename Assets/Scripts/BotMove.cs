@@ -46,6 +46,7 @@ public class BotMove : MonoBehaviour
         selectionBorder.transform.SetParent(this.transform);
         selectionBorder.transform.localPosition = Vector3.zero;
         selectionSprite = selectionBorder.AddComponent<SpriteRenderer>();
+        selectionSprite.sortingLayerName = "UI";
         selectionSprite.sprite = selectionBorderImage;
         selectionSprite.enabled = isSelected;
     }
