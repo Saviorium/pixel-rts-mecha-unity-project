@@ -14,7 +14,7 @@ public class BotMove : MonoBehaviour
     private Vector3 moveTarget = Vector3.zero;
 
     private bool isSelected = false;
-    private SpriteRenderer selectionSprite;
+    public SpriteRenderer selectionSprite;
 
     public Sprite selectionBorderImage;
 
@@ -23,18 +23,13 @@ public class BotMove : MonoBehaviour
         InitSelectionBorder();
     }
 
-    void OnMouseDown ()
-    {
-        HandleSelect();
-    }
+    // void OnMouseDown ()
+    // {
+    //     HandleSelect();
+    // }
 
     void Update()
     {
-        if ((Input.GetMouseButtonDown(1)) && (isSelected)) {
-            moveTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            moveTarget.Scale(new Vector3(1f, 1f, 0f));
-        }
-
         Vector3 travelVector = moveTarget - transform.position;       
         if(travelVector.magnitude > 0.1f) {    
             GetComponent<Rigidbody2D>().velocity = travelVector.normalized * moveSpeed * Time.deltaTime;
@@ -44,6 +39,12 @@ public class BotMove : MonoBehaviour
         }
     }
 
+    public void SetMoveTarget(Vector3 target)
+    {
+        moveTarget = target;
+        moveTarget.Scale(new Vector3(1f, 1f, 0f));
+    }
+
     void InitSelectionBorder() {
         GameObject selectionBorder = new GameObject("Select Border");
         selectionBorder.transform.SetParent(this.transform);
@@ -51,11 +52,11 @@ public class BotMove : MonoBehaviour
         selectionSprite = selectionBorder.AddComponent<SpriteRenderer>();
         selectionSprite.sortingLayerName = "UI";
         selectionSprite.sprite = selectionBorderImage;
-        selectionSprite.enabled = isSelected;
+        selectionSprite.enabled = false;
     }
 
-    void HandleSelect() {
-        isSelected = !isSelected;
-        selectionSprite.enabled = isSelected;
-    }
+    // public void HandleSelect() {
+    //     isSelected = !isSelected;
+    //     selectionSprite.enabled = isSelected;
+    // }
 }
