@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class building : MonoBehaviour
 {
-    public float health = 100;
-    private string name = "Base";
+    public float health;
+    private string name;
     public GameObject myPrefab;
 
+    // Start is called before the first frame update
     void Start()
     {
+        health = 100;
+        name = "Base";
         Debug.Log(GetComponent<BoxCollider2D>().size);
     }
 
