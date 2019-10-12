@@ -105,11 +105,14 @@ MonoBehaviour:
 <<<<<<< HEAD
   isChoosed: 0
   moveSpeed: 100
+<<<<<<< HEAD
 =======
   moveSpeed: 20
   selectionBorderImage: {fileID: 21300000, guid: e4392f1eb81da2a4791ce05872539e77,
     type: 3}
 >>>>>>> ef65431a8f33c478f60cc060d0b14bc252a1dbdf
+=======
+>>>>>>> Second try, Phusics working!
 --- !u!50 &1338063336
 Rigidbody2D:
   serializedVersion: 4

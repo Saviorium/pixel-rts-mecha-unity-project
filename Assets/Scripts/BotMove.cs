@@ -38,7 +38,12 @@ public class BotMove : MonoBehaviour
         Vector3 travelVector = moveTarget - transform.position;
         if(travelVector.magnitude > 0.1f) {            
             GetComponent<Rigidbody2D>().velocity = travelVector.normalized * moveSpeed * Time.deltaTime;
+<<<<<<< HEAD
         }else if (travelVector.magnitude < 0.1f) {
+=======
+        }
+        else if(travelVector.magnitude < 0.1f) {            
+>>>>>>> Second try, Phusics working!
             GetComponent<Rigidbody2D>().velocity = travelVector * moveSpeed * Time.deltaTime;
             moveTarget = transform.position;
         }
