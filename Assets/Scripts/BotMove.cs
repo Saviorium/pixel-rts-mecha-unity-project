@@ -4,36 +4,33 @@ using UnityEngine;
 
 public class BotMove : MonoBehaviour
 {
-    public float head;
-    public float body;
-    public float legs;
+    public float head = 100;
+    public float body = 100;
+    public float legs = 100;
 
-    public string name;
-    public bool isChoosed;
+    public string name = "Bot-4000";
 
     public float moveSpeed = 20f;
     private Vector3 moveTarget = Vector3.zero;
 
-    // Start is called before the first frame update
+    private bool isSelected = false;
+    private SpriteRenderer selectionSprite;
+
+    public Sprite selectionBorderImage;
+
     void Start()
     {
-        head = 100;
-        body = 100;
-        legs = 100;
-
-        name = "Bot-4000";
-        isChoosed = false;
+        InitSelectionBorder();
     }
 
     void OnMouseDown ()
     {
-        isChoosed = !isChoosed;
-        Debug.Log(isChoosed);
+        HandleSelect();
     }
 
     void Update()
     {
-        if ((Input.GetMouseButtonDown(1)) && (isChoosed)) {
+        if ((Input.GetMouseButtonDown(1)) && (isSelected)) {
             moveTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             moveTarget.Scale(new Vector3(1f, 1f, 0f));
         }
@@ -45,5 +42,20 @@ public class BotMove : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = travelVector * moveSpeed * Time.deltaTime;
             moveTarget = transform.position;
         }
+    }
+
+    void InitSelectionBorder() {
+        GameObject selectionBorder = new GameObject("Select Border");
+        selectionBorder.transform.SetParent(this.transform);
+        selectionBorder.transform.localPosition = Vector3.zero;
+        selectionSprite = selectionBorder.AddComponent<SpriteRenderer>();
+        selectionSprite.sortingLayerName = "UI";
+        selectionSprite.sprite = selectionBorderImage;
+        selectionSprite.enabled = isSelected;
+    }
+
+    void HandleSelect() {
+        isSelected = !isSelected;
+        selectionSprite.enabled = isSelected;
     }
 }

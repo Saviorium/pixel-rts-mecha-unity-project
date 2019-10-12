@@ -12,7 +12,11 @@ GameObject:
   - component: {fileID: 1157726651308067002}
   - component: {fileID: 114777507427628610}
   - component: {fileID: 1338063336}
+<<<<<<< HEAD
   - component: {fileID: 3838288515189242566}
+=======
+  - component: {fileID: 58596364654693124}
+>>>>>>> ef65431a8f33c478f60cc060d0b14bc252a1dbdf
   m_Layer: 0
   m_Name: bot-1
   m_TagString: Bot
@@ -68,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -239442683
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f899d3c96df1f934781b363109db6a2d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -98,8 +102,14 @@ MonoBehaviour:
   body: 100
   legs: 100
   name: Bot
+<<<<<<< HEAD
   isChoosed: 0
   moveSpeed: 100
+=======
+  moveSpeed: 20
+  selectionBorderImage: {fileID: 21300000, guid: e4392f1eb81da2a4791ce05872539e77,
+    type: 3}
+>>>>>>> ef65431a8f33c478f60cc060d0b14bc252a1dbdf
 --- !u!50 &1338063336
 Rigidbody2D:
   serializedVersion: 4
@@ -121,8 +131,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+<<<<<<< HEAD
 --- !u!61 &3838288515189242566
 BoxCollider2D:
+=======
+--- !u!58 &58596364654693124
+CircleCollider2D:
+>>>>>>> ef65431a8f33c478f60cc060d0b14bc252a1dbdf
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -134,6 +149,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
+<<<<<<< HEAD
   m_Offset: {x: 0.005187094, y: -0.06224549}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,3 +163,8 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64727557, y: 0.76139235}
   m_EdgeRadius: 0
+=======
+  m_Offset: {x: 0.004326403, y: -0.067059994}
+  serializedVersion: 2
+  m_Radius: 0.35939032
+>>>>>>> ef65431a8f33c478f60cc060d0b14bc252a1dbdf
