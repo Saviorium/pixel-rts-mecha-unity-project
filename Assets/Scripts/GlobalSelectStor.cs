@@ -34,9 +34,11 @@ public class GlobalSelectStor : MonoBehaviour
                 switch (hit.collider.tag)
                 {
                     case "Bot": SelectBot(hit.collider.gameObject); break;
-                    default:  ClearSelectedItems(); break;
+                    // default:   break;
                 }
-            } 
+            }else{
+                ClearSelectedItems();
+            }
         // При нажатии ПКМ - если на юнита - атаковать, если на пустое место - идти
         }else if (Input.GetMouseButtonDown(1))
         {
@@ -60,7 +62,6 @@ public class GlobalSelectStor : MonoBehaviour
         }
         if(Input.GetMouseButtonUp(0)) {
             lineRenderer.enabled = false;
-            ClearSelectedItems();
             var box_x_1 = endPoint.x >= startPoint.x? startPoint.x : endPoint.x ;
             var box_x_2 = endPoint.x >= startPoint.x? endPoint.x : startPoint.x;
             var box_y_1 = endPoint.y >= startPoint.y? startPoint.y : endPoint.y;
