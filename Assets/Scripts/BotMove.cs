@@ -4,59 +4,58 @@ using UnityEngine;
 
 public class BotMove : MonoBehaviour
 {
-    public float head;
-    public float body;
-    public float legs;
+    public float head = 100;
+    public float body = 100;
+    public float legs = 100;
 
-    public string name;
-    public bool isChoosed;
+    public string name = "Bot-4000";
 
-    public float moveSpeed;
-    public GameObject myPrefab;
-    private GameObject SelectionBox;
-    
+    public float moveSpeed = 100f;
     private Vector3 moveTarget = Vector3.zero;
 
-    // Start is called before the first frame update
+    private bool isSelected = false;
+    private SpriteRenderer selectionSprite;
+
+    public Sprite selectionBorderImage;
+
     void Start()
     {
-        head = 100;
-        body = 100;
-        legs = 100;
-        moveSpeed = 100f;
-        name = "Bot-4000";
-        isChoosed = false;
+        InitSelectionBorder();
     }
 
     void OnMouseDown ()
     {
-        isChoosed = !isChoosed;
-        if (isChoosed){
-            SelectionBox = new MoveSelect(gameObject);
-        }else{
-            Destroy(SelectionBox);
-        }
+        HandleSelect();
     }
 
     void Update()
     {
-        if ((Input.GetMouseButtonDown(1)) && (isChoosed)) {
+        if ((Input.GetMouseButtonDown(1)) && (isSelected)) {
             moveTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             moveTarget.Scale(new Vector3(1f, 1f, 0f));
         }
 
-        Vector3 travelVector = moveTarget - transform.position;
-        if(travelVector.magnitude > 0.1f) {            
-            setVelocity(gameObject, travelVector.normalized);
-        }
-        else if(travelVector.magnitude < 0.1f) {            
-            setVelocity(gameObject, travelVector);
+        Vector3 travelVector = moveTarget - transform.position;       
+        if(travelVector.magnitude > 0.1f) {    
+            GetComponent<Rigidbody2D>().velocity = travelVector.normalized * moveSpeed * Time.deltaTime;
+        }else if (travelVector.magnitude < 0.1f) {
+            GetComponent<Rigidbody2D>().velocity = travelVector * moveSpeed * Time.deltaTime;
             moveTarget = transform.position;
         }
     }
 
-    void setVelocity(GameObject obj, Vector3 moveVector)
-    {
-       obj.GetComponent<Rigidbody2D>().velocity = moveVector* moveSpeed * Time.deltaTime;
+    void InitSelectionBorder() {
+        GameObject selectionBorder = new GameObject("Select Border");
+        selectionBorder.transform.SetParent(this.transform);
+        selectionBorder.transform.localPosition = Vector3.zero;
+        selectionSprite = selectionBorder.AddComponent<SpriteRenderer>();
+        selectionSprite.sortingLayerName = "UI";
+        selectionSprite.sprite = selectionBorderImage;
+        selectionSprite.enabled = isSelected;
+    }
+
+    void HandleSelect() {
+        isSelected = !isSelected;
+        selectionSprite.enabled = isSelected;
     }
 }
