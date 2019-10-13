@@ -4,32 +4,34 @@ using UnityEngine;
 
 public class BotMove : MonoBehaviour
 {
+    public string name = "Bot-4000";
+
     public float head = 100;
     public float body = 100;
     public float legs = 100;
-
-    public string name = "Bot-4000";
+    public float attackRange = 8f;
 
     public float moveSpeed = 100f;
-    private Vector3 moveTarget = Vector3.zero;
+    public int team;
 
-    private bool isSelected = false;
     public SpriteRenderer selectionSprite;
-
     public Sprite selectionBorderImage;
+
+    public GameObject ammo;
+
+    private Vector3 moveTarget;
+    private GameObject attackTarget;
+    private bool isSelected = false;
+    private float ShotLostTime;
 
     void Start()
     {
         InitSelectionBorder();
     }
 
-    // void OnMouseDown ()
-    // {
-    //     HandleSelect();
-    // }
-
     void Update()
     {
+        
         Vector3 travelVector = moveTarget - transform.position;       
         if(travelVector.magnitude > 0.1f) {    
             GetComponent<Rigidbody2D>().velocity = travelVector.normalized * moveSpeed * Time.deltaTime;
@@ -37,12 +39,31 @@ public class BotMove : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = travelVector * moveSpeed * Time.deltaTime;
             moveTarget = transform.position;
         }
+
+        if (attackTarget != null){
+            Vector3 attackVector = (attackTarget.transform.position - transform.position).normalized;
+            if (attackVector.magnitude <= attackRange)
+            {
+                if (Time.time > (ShotLostTime + 5)) {
+                    GameObject bullet = Instantiate(ammo, (Vector3) transform.position + attackVector, Quaternion.identity);
+                    bullet.GetComponent<Bullet>().MoveToTarget(attackVector);
+                    ShotLostTime = Time.time;
+                }
+            }
+        }
     }
 
     public void SetMoveTarget(Vector3 target)
     {
         moveTarget = target;
         moveTarget.Scale(new Vector3(1f, 1f, 0f));
+    }
+
+    public void SetAttackTarget(GameObject target)
+    {
+        bool IsEnemy = GameObject.Find("RelationWatcher").GetComponent<RelationStorage>().IsEnemy(gameObject, target);
+        if (IsEnemy)
+            attackTarget = target;
     }
 
     void InitSelectionBorder() {
@@ -54,9 +75,4 @@ public class BotMove : MonoBehaviour
         selectionSprite.sprite = selectionBorderImage;
         selectionSprite.enabled = false;
     }
-
-    // public void HandleSelect() {
-    //     isSelected = !isSelected;
-    //     selectionSprite.enabled = isSelected;
-    // }
 }

@@ -45,7 +45,10 @@ public class GlobalSelectStor : MonoBehaviour
             RaycastHit2D  hit = GetHit();
             if (hit.collider != null)
             {
-                //TODO: attack
+                foreach (GameObject bot in SelectedObjects)
+                {
+                    bot.GetComponent<BotMove>().SetAttackTarget(hit.collider.gameObject);
+                }
             }else{
                 foreach (GameObject bot in SelectedObjects)
                 {
@@ -71,8 +74,8 @@ public class GlobalSelectStor : MonoBehaviour
 
             foreach(GameObject bot in bots)
             {
-                Debug.Log(bot.transform.position);
-                Debug.Log("( "+box_x_1 +" : "+box_x_2+" ) " + " ( "+box_y_1 +" : "+box_y_2+" )");
+                // Debug.Log(bot.transform.position);
+                // Debug.Log("( "+box_x_1 +" : "+box_x_2+" ) " + " ( "+box_y_1 +" : "+box_y_2+" )");
                 if ((bot.transform.position.x >= box_x_1 && bot.transform.position.x <= box_x_2) &&
                    (bot.transform.position.y >= box_y_1 && bot.transform.position.y <= box_y_2))
                 {

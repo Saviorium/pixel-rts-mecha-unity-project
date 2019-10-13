@@ -5,12 +5,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
-    public float damage;
-    public float speed;
+    public float damage = 1;
+    private float speed = 1000f;
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector2(1.0f, 0) * (speed);
+        
     }
 
     void OnCollisionEnter2D (Collision2D other)
@@ -35,7 +35,12 @@ public class Bullet : MonoBehaviour
         }
         else if(other.gameObject.CompareTag("base"))
         {other.gameObject.GetComponent<building>().health = other.gameObject.GetComponent<building>().health - damage; Destroy(gameObject);}
-        Debug.Log(other.gameObject.tag);
+    }
+
+    public void MoveToTarget(Vector2 target)
+    {
+        Debug.Log(target);
+        GetComponent<Rigidbody2D>().velocity = target * speed * Time.deltaTime;
     }
 
 }

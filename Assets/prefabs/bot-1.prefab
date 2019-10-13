@@ -94,13 +94,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee14f8a07cd0dbc49b931711a6293dbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Bot
   head: 100
   body: 100
   legs: 100
-  name: Bot
+  attackRange: 80
   moveSpeed: 100
+  team: 0
+  selectionSprite: {fileID: 0}
   selectionBorderImage: {fileID: 21300000, guid: e4392f1eb81da2a4791ce05872539e77,
     type: 3}
+  ammo: {fileID: 3677047588816270042, guid: b0d5f7ee4238ccd4fb38bb0b27e2bfa0, type: 3}
 --- !u!50 &1338063336
 Rigidbody2D:
   serializedVersion: 4
