@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Bot
-  - base
+  - Building
+  - Unit
   layers:
   - Default
   - TransparentFX

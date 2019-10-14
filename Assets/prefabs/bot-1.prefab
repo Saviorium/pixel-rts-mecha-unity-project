@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 58596364654693124}
   m_Layer: 0
   m_Name: bot-1
-  m_TagString: Bot
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,16 +95,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Bot
+  health: 100
+  attackRange: 80
+  attackSpeed: 10
+  moveSpeed: 100
+  team: 1
+  ammo: {fileID: 3677047588816270042, guid: 23a23f8ce38c6e3468bb6719dc97af20, type: 3}
   head: 100
   body: 100
   legs: 100
-  attackRange: 80
-  moveSpeed: 100
-  team: 0
-  selectionSprite: {fileID: 0}
-  selectionBorderImage: {fileID: 21300000, guid: e4392f1eb81da2a4791ce05872539e77,
-    type: 3}
-  ammo: {fileID: 3677047588816270042, guid: b0d5f7ee4238ccd4fb38bb0b27e2bfa0, type: 3}
 --- !u!50 &1338063336
 Rigidbody2D:
   serializedVersion: 4

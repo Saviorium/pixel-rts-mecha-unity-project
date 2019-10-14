@@ -22,8 +22,8 @@ public class RelationStorage : MonoBehaviour
 
     public bool IsEnemy(GameObject bot_1, GameObject bot_2)
     {
-        int team_1 = Teams.FindIndex(x => x == bot_1.GetComponent<BotMove>().team);
-        int team_2 = Teams.FindIndex(x => x == bot_2.GetComponent<BotMove>().team);
+        int team_1 = Teams.FindIndex(x => x == bot_1.GetComponent<Unit>().team);
+        int team_2 = Teams.FindIndex(x => x == bot_2.GetComponent<Unit>().team);
         return RelationMap[team_1][team_2] == 1? true:false; 
     }
 }

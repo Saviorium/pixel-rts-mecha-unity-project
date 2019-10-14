@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 66847531673015732}
   m_Layer: 0
   m_Name: plane
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,6 +94,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76027ba72072c694caa697dbd838d637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Bot-4000
+  health: 100
+  attackRange: 8
+  attackSpeed: 1
+  attackAccuracy: 1
+  moveSpeed: 100
+  team: 1
+  ammo: {fileID: 3677047588816270042, guid: 23a23f8ce38c6e3468bb6719dc97af20, type: 3}
 --- !u!50 &50222195326187028
 Rigidbody2D:
   serializedVersion: 4

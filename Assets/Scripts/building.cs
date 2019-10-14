@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class building : MonoBehaviour
+public class Building : MonoBehaviour
 {
     public float health = 100;
-    private string name = "Base";
+    private string nameStr = "Base";
     public int team;
     public GameObject myPrefab;
 
@@ -17,6 +17,6 @@ public class building : MonoBehaviour
     void OnMouseDown ()
     {
         GameObject Bot = Instantiate(myPrefab, transform.position + new Vector3(GetComponent<BoxCollider2D>().size.x*0.5f + 0.5f, 0, 0), Quaternion.identity);
-        Bot.GetComponent<BotMove>().team = team;
+        Bot.GetComponent<Unit>().team = team;
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalSelectStor : MonoBehaviour
+public class GlobalSelectStore : MonoBehaviour
 {
     private List<GameObject> SelectedObjects;
     private List<GameObject> SelectedObjects_box;
@@ -33,7 +33,7 @@ public class GlobalSelectStor : MonoBehaviour
             {   
                 switch (hit.collider.tag)
                 {
-                    case "Bot": SelectBot(hit.collider.gameObject); break;
+                    case "Unit": SelectUnit(hit.collider.gameObject); break;
                     // default:   break;
                 }
             }else{
@@ -45,14 +45,14 @@ public class GlobalSelectStor : MonoBehaviour
             RaycastHit2D  hit = GetHit();
             if (hit.collider != null)
             {
-                foreach (GameObject bot in SelectedObjects)
+                foreach (GameObject unit in SelectedObjects)
                 {
-                    bot.GetComponent<BotMove>().SetAttackTarget(hit.collider.gameObject);
+                    unit.GetComponent<Unit>().SetAttackTarget(hit.collider.gameObject);
                 }
             }else{
-                foreach (GameObject bot in SelectedObjects)
+                foreach (GameObject unit in SelectedObjects)
                 {
-                    bot.GetComponent<BotMove>().SetMoveTarget( Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                    unit.GetComponent<Unit>().SetMoveTarget( Camera.main.ScreenToWorldPoint(Input.mousePosition));
                 }
             }
         }
@@ -70,25 +70,22 @@ public class GlobalSelectStor : MonoBehaviour
             var box_y_1 = endPoint.y >= startPoint.y? startPoint.y : endPoint.y;
             var box_y_2 = endPoint.y >= startPoint.y? endPoint.y : startPoint.y ;
             SelectedObjects_box = new List<GameObject>();
-            var bots = GameObject.FindGameObjectsWithTag("Bot");
+            var units = GameObject.FindGameObjectsWithTag("Unit");
 
-            foreach(GameObject bot in bots)
+            foreach(GameObject unit in units)
             {
-                // Debug.Log(bot.transform.position);
-                // Debug.Log("( "+box_x_1 +" : "+box_x_2+" ) " + " ( "+box_y_1 +" : "+box_y_2+" )");
-                if ((bot.transform.position.x >= box_x_1 && bot.transform.position.x <= box_x_2) &&
-                   (bot.transform.position.y >= box_y_1 && bot.transform.position.y <= box_y_2))
+                if ((unit.transform.position.x >= box_x_1 && unit.transform.position.x <= box_x_2) &&
+                   (unit.transform.position.y >= box_y_1 && unit.transform.position.y <= box_y_2))
                 {
-                    // SelectBot(bot);
-                    SelectedObjects_box.Add(bot);
-                    bot.GetComponent<BotMove>().selectionSprite.enabled = true;
+                    SelectedObjects_box.Add(unit);
+                    //unit.GetComponent<Unit>().selectionSprite.enabled = true;
                 }
             }
             if (SelectedObjects_box.Count > 0)
             {
                 ClearSelectedItems();
-                foreach(GameObject bot in SelectedObjects_box)
-                    SelectBot(bot);
+                foreach(GameObject unit in SelectedObjects_box)
+                    SelectUnit(unit);
             }
 
         }
@@ -107,24 +104,24 @@ public class GlobalSelectStor : MonoBehaviour
 
     void ClearSelectedItems()
     {
-        foreach (GameObject bot in SelectedObjects)
+        foreach (GameObject unit in SelectedObjects)
         {
-            bot.GetComponent<BotMove>().selectionSprite.enabled = false;
+            unit.GetComponent<Unit>().SetSelection(false);
         }
         SelectedObjects = new List<GameObject>();
     }
 
-    void SelectBot(GameObject bot)
+    void SelectUnit(GameObject unit)
     {
-        if (SelectedObjects.Find(x => x == bot) == null)
+        if (SelectedObjects.Find(x => x == unit) == null)
         {
-            SelectedObjects.Add(bot);
-            bot.GetComponent<BotMove>().selectionSprite.enabled = true;
+            SelectedObjects.Add(unit);
+            unit.GetComponent<Unit>().SetSelection(true);
         }
         else
         {
-            SelectedObjects.Remove(bot);
-            bot.GetComponent<BotMove>().selectionSprite.enabled = false;
+            SelectedObjects.Remove(unit);
+            unit.GetComponent<Unit>().SetSelection(false);
         }
     }
 
