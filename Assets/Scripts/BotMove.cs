@@ -39,17 +39,21 @@ public class BotMove : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = travelVector * moveSpeed * Time.deltaTime;
             moveTarget = transform.position;
         }
-
-        if (attackTarget != null){
+        if (attackTarget != null ){
             Vector3 attackVector = (attackTarget.transform.position - transform.position).normalized;
-            if (attackVector.magnitude <= attackRange)
-            {
-                if (Time.time > (ShotLostTime + 5)) {
+            RaycastHit2D  hit = Physics2D.Raycast(transform.position + attackVector,
+                                                  new Vector2( 
+                                                          attackVector.x, 
+                                                          attackVector.y
+                                                         ),
+                                                  attackRange);
+            if (hit.collider != null)
+                if (attackVector.magnitude <= attackRange && hit.collider.gameObject == attackTarget && Time.time > (ShotLostTime + 5))
+                {
                     GameObject bullet = Instantiate(ammo, (Vector3) transform.position + attackVector, Quaternion.identity);
                     bullet.GetComponent<Bullet>().MoveToTarget(attackVector);
                     ShotLostTime = Time.time;
                 }
-            }
         }
     }
 
@@ -74,5 +78,16 @@ public class BotMove : MonoBehaviour
         selectionSprite.sortingLayerName = "UI";
         selectionSprite.sprite = selectionBorderImage;
         selectionSprite.enabled = false;
+    }
+
+    RaycastHit2D GetHit()
+    {
+        var mouse_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D  hit = Physics2D.Raycast(new Vector2( 
+                                                          mouse_pos.x, 
+                                                          mouse_pos.y
+                                                         ),
+                                              Vector2.zero, 0);
+        return hit;
     }
 }
