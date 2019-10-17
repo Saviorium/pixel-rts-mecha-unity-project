@@ -30,4 +30,11 @@ public class Bullet : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = target * speed;
     }
 
+    public void AttackTarget(Vector3 direction, float damage_to_objects, float damage_to_units)
+    {
+        Debug.Log(direction);
+        damage += damage_to_objects;
+        GetComponent<Rigidbody2D>().velocity = direction * speed;
+    }
+
 }

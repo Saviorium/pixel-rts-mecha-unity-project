@@ -93,8 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de2fe18e9d563f4fb14821be614a297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
-  team: 1
+  health: 100
+  team: 0
   myPrefab: {fileID: 4277048025947629422, guid: c773b3258ffdea74eba1b9f32333e241,
     type: 3}
 --- !u!61 &61488817985259998
