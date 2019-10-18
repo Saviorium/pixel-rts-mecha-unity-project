@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1338063336}
   - component: {fileID: 58596364654693124}
   m_Layer: 0
-  m_Name: bot-1
+  m_Name: Bot
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,16 +94,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee14f8a07cd0dbc49b931711a6293dbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Bot
-  health: 100
-  attackRange: 80
-  attackSpeed: 10
-  moveSpeed: 100
+  nameStr: Unnamed Unit
   team: 1
+  modules: []
   ammo: {fileID: 3677047588816270042, guid: 23a23f8ce38c6e3468bb6719dc97af20, type: 3}
-  head: 100
-  body: 100
-  legs: 100
 --- !u!50 &1338063336
 Rigidbody2D:
   serializedVersion: 4

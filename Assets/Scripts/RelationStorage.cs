@@ -11,7 +11,7 @@ public class RelationStorage : MonoBehaviour
     void Start()
     {
         //Пока захардкожу ибо не вижу возможности пока как-либо выбрать отношения команд во время игры, если только атаковать - перевести во вражду
-        // 0 - Дружба, 1 - Вражда, -1 - Нейтралитет
+        // -1 - Дружба, 1 - Вражда, 0 - Нейтралитет
         Teams = new List<int> {1, 2, 3, 4};
         RelationMap = new List<List<int>>();
         RelationMap.Add(new List<int> { 0,  1,  0, -1});
