@@ -338,6 +338,11 @@ PrefabInstance:
       propertyPath: team
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114870157383091114, guid: d984200baf376b04b970735d596fd313,
+        type: 3}
+      propertyPath: team_base
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d984200baf376b04b970735d596fd313, type: 3}
 --- !u!1 &999472800
@@ -2737,6 +2742,11 @@ PrefabInstance:
     - target: {fileID: 114870157383091114, guid: d984200baf376b04b970735d596fd313,
         type: 3}
       propertyPath: team
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114870157383091114, guid: d984200baf376b04b970735d596fd313,
+        type: 3}
+      propertyPath: team_base
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []

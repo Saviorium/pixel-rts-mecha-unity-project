@@ -3,19 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Unit : MonoBehaviour
+public abstract class Unit : PlayerObject
 {
     public string nameStr = "Unnamed Unit";
-    public int team;
-
     public List<UnitModule> modules;
-
-    protected SpriteRenderer selectionSprite;
 
     protected Vector3 moveTarget;
     protected GameObject attackTarget;
-
-    protected RelationStorage relationWatcher;
 
     void Start() {
         InitSelectionBorder();
@@ -78,7 +72,7 @@ public abstract class Unit : MonoBehaviour
     {
         foreach (var module in modules) {
             if (module is Gun) {
-                ((Gun)module).Fire((attackTarget.transform.position - transform.position).normalized, transform.position);
+                ((Gun)module).Fire(attackTarget.transform.position - transform.position, transform.position);
             }
         }
     }
@@ -105,11 +99,12 @@ public abstract class Unit : MonoBehaviour
         selectionSprite.enabled = false;
     }
 
-    public virtual void SetSelection(bool isSelected) {
+    public override void SetSelection(bool isSelected) {
         selectionSprite.enabled = isSelected;
     }
 
     public virtual void Die() {
+        GameObject.Find("SelectedItems").GetComponent<GlobalSelectStore>().SelectUnit(gameObject);
         Destroy(gameObject);
     }
 
@@ -123,7 +118,7 @@ public abstract class Unit : MonoBehaviour
         return hit;
     }
 
-    public virtual void TakeDamage(float damage) {
+    public override void TakeDamage(float damage) {
         modules[UnityEngine.Random.Range(0, modules.Count)].TakeDamage(damage);
     }
 }

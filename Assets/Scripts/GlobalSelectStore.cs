@@ -6,7 +6,6 @@ public class GlobalSelectStore : MonoBehaviour
 {
     private List<GameObject> SelectedObjects;
     private List<GameObject> SelectedObjects_box;
-    private List<GameObject> SelectedObjectsForAttack;
 
     private Vector3 startPoint = Vector3.zero;
     private Vector3 endPoint = Vector3.zero;
@@ -31,11 +30,8 @@ public class GlobalSelectStore : MonoBehaviour
             startPoint = getMousePos();
             if (hit.collider != null) 
             {   
-                switch (hit.collider.tag)
-                {
-                    case "Unit": SelectUnit(hit.collider.gameObject); break;
-                    // default:   break;
-                }
+                ClearSelectedItems();
+                SelectUnit(hit.collider.gameObject);
             }else{
                 ClearSelectedItems();
             }
@@ -47,12 +43,18 @@ public class GlobalSelectStore : MonoBehaviour
             {
                 foreach (GameObject unit in SelectedObjects)
                 {
-                    unit.GetComponent<Unit>().SetAttackTarget(hit.collider.gameObject);
+                    if (unit != null)
+                        unit.GetComponent<Unit>().SetAttackTarget(hit.collider.gameObject);
+                    else 
+                        SelectedObjects.Remove(unit);
                 }
             }else{
                 foreach (GameObject unit in SelectedObjects)
                 {
-                    unit.GetComponent<Unit>().SetMoveTarget( Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                    if (unit != null)
+                        unit.GetComponent<Unit>().SetMoveTarget( Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                    else 
+                        SelectedObjects.Remove(unit);
                 }
             }
         }
@@ -106,12 +108,12 @@ public class GlobalSelectStore : MonoBehaviour
     {
         foreach (GameObject unit in SelectedObjects)
         {
-            unit.GetComponent<Unit>().SetSelection(false);
+            unit.GetComponent<PlayerObject>().SetSelection(false);
         }
         SelectedObjects = new List<GameObject>();
     }
 
-    void SelectUnit(GameObject unit)
+    public void SelectUnit(GameObject unit)
     {
         if (SelectedObjects.Find(x => x == unit) == null)
         {

@@ -10,6 +10,7 @@ public class Gatling : Gun
         damageToUnits = 10;
         fireRate = 5;
         range = 8;
+        accuracy = .15f;
         ammo = (GameObject)Resources.Load("Bullet Fire");
 
         isAgainstSurface = true;
