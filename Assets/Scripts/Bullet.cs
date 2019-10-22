@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
 
     public float damage = 1;
     private float speed = 10f;
-    
+
 
     void OnCollisionEnter2D (Collision2D other)
     {

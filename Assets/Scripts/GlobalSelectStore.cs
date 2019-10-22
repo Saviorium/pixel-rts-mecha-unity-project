@@ -45,7 +45,7 @@ public class GlobalSelectStore : MonoBehaviour
                 {
                     if (unit != null)
                         unit.GetComponent<Unit>().SetAttackTarget(hit.collider.gameObject);
-                    else 
+                    else
                         SelectedObjects.Remove(unit);
                 }
             }else{
@@ -53,7 +53,7 @@ public class GlobalSelectStore : MonoBehaviour
                 {
                     if (unit != null)
                         unit.GetComponent<Unit>().SetMoveTarget( Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                    else 
+                    else
                         SelectedObjects.Remove(unit);
                 }
             }
