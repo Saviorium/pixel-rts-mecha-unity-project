@@ -20,7 +20,7 @@ public class Gun : UnitModule
     {
         float Distance = Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2));
         Vector3 Direction = direction.normalized;
-        var relationWatcher = GameObject.Find("RelationWatcher").GetComponent<RelationStorage>();
+        var relationWatcher = GameObject.Find("RelationWatcher").GetComponent<AttitudeStorage>();
         RaycastHit2D  hit = Physics2D.Raycast(position + Direction,
                                               new Vector2(Direction.x, Direction.y),
                                               range);

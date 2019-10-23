@@ -175,7 +175,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: 0
   health: 100
-  team_base: 0
   myPrefab: {fileID: 4277048025947629422, guid: c773b3258ffdea74eba1b9f32333e241,
     type: 3}
 --- !u!61 &61488817985259998

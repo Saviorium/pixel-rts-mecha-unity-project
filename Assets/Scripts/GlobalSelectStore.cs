@@ -108,7 +108,9 @@ public class GlobalSelectStore : MonoBehaviour
     {
         foreach (GameObject unit in SelectedObjects)
         {
-            unit.GetComponent<PlayerObject>().SetSelection(false);
+            if(unit != null) {
+                unit.GetComponent<PlayerObject>().SetSelection(false);
+            }
         }
         SelectedObjects = new List<GameObject>();
     }
