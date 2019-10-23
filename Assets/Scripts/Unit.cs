@@ -15,10 +15,10 @@ public abstract class Unit : PlayerObject
 
     void Start() {
         InitSelectionBorder();
+        SetColor();
         relationWatcher = GameObject.Find("RelationWatcher").GetComponent<RelationStorage>();
         taskList = new Queue<Task>();
         rigidbody2d = GetComponent<Rigidbody2D>();
-
         InitComponents();
     }
 
@@ -181,16 +181,9 @@ public abstract class Unit : PlayerObject
         }
     }
 
-    
-    protected virtual void InitSelectionBorder() {
-        GameObject selectionBorder = (GameObject)Instantiate(Resources.Load("Selection Box"));
-        selectionBorder.transform.SetParent(this.transform);
-        selectionBorder.transform.localPosition = Vector3.zero;
-        selectionSprite = selectionBorder.GetComponent<SpriteRenderer>();
-        selectionSprite.enabled = false;
-    }
 
-    public override void SetSelection(bool isSelected) {
+    public override void SetSelection(bool isSelected) 
+    {
         selectionSprite.enabled = isSelected;
     }
 

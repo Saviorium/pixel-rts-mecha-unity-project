@@ -5,6 +5,7 @@ using UnityEngine;
 public class RelationStorage : MonoBehaviour
 {
     private List<List<int>> RelationMap;
+    private List<Color> TeamColors;
     private List<int> Teams;
 
     // Start is called before the first frame update
@@ -18,6 +19,8 @@ public class RelationStorage : MonoBehaviour
         RelationMap.Add(new List<int> { 1,  0,  1,  0});
         RelationMap.Add(new List<int> { 0,  1,  0,  1});
         RelationMap.Add(new List<int> {-1,  0,  1,  0});
+
+        TeamColors = new List<Color>() {Color.blue, Color.red, Color.yellow, Color.black};
     }
 
     public bool IsEnemy(GameObject Attaker, GameObject Target)
@@ -25,5 +28,10 @@ public class RelationStorage : MonoBehaviour
         int team_1 = Teams.FindIndex(x => x == Attaker.GetComponent<PlayerObject>().team);
         int team_2 = Teams.FindIndex(x => x == Target.GetComponent<PlayerObject>().team);
         return RelationMap[team_1][team_2] == 1? true:false; 
+    }
+
+    public Color GetTeamColor(int team)
+    {
+        return TeamColors[team-1];
     }
 }

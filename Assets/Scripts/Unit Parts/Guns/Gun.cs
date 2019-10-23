@@ -41,7 +41,7 @@ public class Gun : UnitModule
     void Shoot_ammo (Vector3 direction, Vector3 position, float Distance)
     {
         GameObject bullet = Instantiate(ammo, position + direction, Quaternion.identity);
-        bullet.GetComponent<Bullet>().AttackTarget(direction, Distance + Random.Range(-accuracy, accuracy), damageToObjects, damageToUnits);
+        bullet.GetComponent<Bullet>().AttackTarget(direction, Distance + Random.Range(-accuracy, accuracy)*10, damageToObjects, damageToUnits);
         shotLostTime = Time.time;
     }
 

@@ -6,12 +6,12 @@ public class Building : PlayerObject
 {
     public float health = 100;
     private string nameStr = "Base";
-    public int team_base;
     public GameObject myPrefab;
 
     void Start()
     {
-        team = team_base;
+        InitSelectionBorder();
+        SetColor();
     }
 
     void OnMouseDown ()

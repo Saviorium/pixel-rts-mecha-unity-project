@@ -118,12 +118,12 @@ public class GlobalSelectStore : MonoBehaviour
         if (SelectedObjects.Find(x => x == unit) == null)
         {
             SelectedObjects.Add(unit);
-            unit.GetComponent<Unit>().SetSelection(true);
+            unit.GetComponent<PlayerObject>().SetSelection(true);
         }
         else
         {
             SelectedObjects.Remove(unit);
-            unit.GetComponent<Unit>().SetSelection(false);
+            unit.GetComponent<PlayerObject>().SetSelection(false);
         }
     }
 
