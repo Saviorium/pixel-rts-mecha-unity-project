@@ -13,6 +13,7 @@ public class PlayerObject : MonoBehaviour
     {
         Transform  children = gameObject.GetComponentsInChildren<Transform>()[1];
         var SpriteRenderer = children.gameObject.GetComponent<SpriteRenderer>();
+        
         SpriteRenderer.color = GameObject.Find("RelationWatcher").GetComponent<RelationStorage>().GetTeamColor(team);
     }
     

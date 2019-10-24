@@ -7,7 +7,13 @@ public class Bullet : MonoBehaviour
 
     public float damage = 1;
     private float speed = 10f;
+    public GameObject Explousion;
 
+    void OnDestroy()
+    {
+        GameObject exploud = Instantiate(Explousion, transform.position, Quaternion.identity);
+        Destroy(exploud,1);
+    }
 
     void OnCollisionEnter2D (Collision2D other)
     {

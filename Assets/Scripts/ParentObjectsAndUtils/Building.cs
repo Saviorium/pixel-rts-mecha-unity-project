@@ -11,6 +11,10 @@ public class Building : PlayerObject
     void Start()
     {
         InitSelectionBorder();
+    }
+
+    void Update()
+    {
         SetColor();
     }
 

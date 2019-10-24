@@ -19,7 +19,7 @@ public class RelationStorage : MonoBehaviour
         RelationMap.Add(new List<int> { 1,  0,  1,  0});
         RelationMap.Add(new List<int> { 0,  1,  0,  1});
         RelationMap.Add(new List<int> {-1,  0,  1,  0});
-
+        
         TeamColors = new List<Color>() {Color.blue, Color.red, Color.yellow, Color.black};
     }
 
