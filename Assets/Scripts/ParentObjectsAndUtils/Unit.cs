@@ -15,8 +15,8 @@ public abstract class Unit : PlayerObject
 
     void Start() {
         InitSelectionBorder();
-        SetColor();
-        relationWatcher = GameObject.Find("RelationWatcher").GetComponent<RelationStorage>();
+        relationWatcher = GameObject.Find("RelationWatcher").GetComponent<AttitudeStorage>(); //FIXME: только 1 Start может быть. Мы типа разделили на 2 файла,
+        SetColor();                                                                           //но они всё равно сильно связаны между собой - ничего не изменилось
         taskList = new Queue<Task>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         InitComponents();

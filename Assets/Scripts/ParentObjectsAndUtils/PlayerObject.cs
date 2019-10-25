@@ -6,15 +6,19 @@ public class PlayerObject : MonoBehaviour
 {
 
     protected SpriteRenderer  selectionSprite;
-    protected RelationStorage relationWatcher;
+    protected AttitudeStorage relationWatcher;
     public    int             team;
 
     protected void SetColor()
     {
         Transform  children = gameObject.GetComponentsInChildren<Transform>()[1];
         var SpriteRenderer = children.gameObject.GetComponent<SpriteRenderer>();
+<<<<<<< HEAD:Assets/Scripts/ParentObjectsAndUtils/PlayerObject.cs
         
         SpriteRenderer.color = GameObject.Find("RelationWatcher").GetComponent<RelationStorage>().GetTeamColor(team);
+=======
+        SpriteRenderer.color = relationWatcher.GetTeamColor(team);
+>>>>>>> ed937b175cd61b5a7b9bb87e9f1b9218834941d7:Assets/Scripts/PlayerObject.cs
     }
     
     public virtual void TakeDamage(float damage)

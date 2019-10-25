@@ -23,10 +23,11 @@ public class Building : PlayerObject
         GameObject Bot = Instantiate(myPrefab, transform.position + new Vector3(GetComponent<BoxCollider2D>().size.x*0.5f + 0.5f, 0, 0), Quaternion.identity);
         Bot.GetComponent<Unit>().team = team;
     }
-    
+
     public override void TakeDamage(float damage) {
         health -= damage;
-        if (health < 0)
+        if (health < 0) {
             Destroy(gameObject);
+        }
     }
 }
