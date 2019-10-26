@@ -18,12 +18,12 @@ public class AttitudeStorage : MonoBehaviour
     {
         int attackerTeam = Attaker.GetComponent<PlayerObject>().team;
         int defenderTeam = Target.GetComponent<PlayerObject>().team;
-        return teams[attackerTeam].GetAttitude(defenderTeam) == Attitude.ENEMY;
+        return teams[attackerTeam-1].GetAttitude(defenderTeam-1) == Attitude.ENEMY;
     }
 
     public Color GetTeamColor(int team)
     {
-        return teams[team].Color;
+        return teams[team-1].Color;
     }
 
     public void SetAttitude(int team1, int team2, Attitude attitude) {
