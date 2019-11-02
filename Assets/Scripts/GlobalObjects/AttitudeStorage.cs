@@ -9,21 +9,21 @@ public class AttitudeStorage : MonoBehaviour
     void Start()
     {
         teams = new Dictionary<int, PlayerTeam>();
-        teams.Add(0, new PlayerTeam(0, Color.red));
+        teams.Add(2, new PlayerTeam(2, Color.red));
         teams.Add(1, new PlayerTeam(1, Color.blue));
-        SetAttitude(0, 1, Attitude.ENEMY);
+        SetAttitude(2, 1, Attitude.ENEMY);
     }
 
     public bool IsEnemy(GameObject Attaker, GameObject Target)
     {
         int attackerTeam = Attaker.GetComponent<PlayerObject>().team;
         int defenderTeam = Target.GetComponent<PlayerObject>().team;
-        return teams[attackerTeam-1].GetAttitude(defenderTeam-1) == Attitude.ENEMY;
+        return teams[attackerTeam].GetAttitude(defenderTeam) == Attitude.ENEMY;
     }
 
     public Color GetTeamColor(int team)
     {
-        return teams[team-1].Color;
+        return teams[team].Color;
     }
 
     public void SetAttitude(int team1, int team2, Attitude attitude) {
