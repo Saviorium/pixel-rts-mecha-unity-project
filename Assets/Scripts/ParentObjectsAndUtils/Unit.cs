@@ -188,6 +188,7 @@ public abstract class Unit : PlayerObject
     }
 
     public virtual void Die() {
+        ClearTasks();
         GameObject.Find("SelectedItems").GetComponent<GlobalSelectStore>().SelectUnit(gameObject);
         Destroy(gameObject);
     }
