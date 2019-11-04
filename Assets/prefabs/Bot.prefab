@@ -178,6 +178,8 @@ MonoBehaviour:
   nameStr: Unnamed Unit
   modules: []
   ammo: {fileID: 3677047588816270042, guid: 23a23f8ce38c6e3468bb6719dc97af20, type: 3}
+  Explousion: {fileID: 8131877620178579220, guid: ba293920568077247868c2e3a3efe8e4,
+    type: 3}
 --- !u!50 &1338063336
 Rigidbody2D:
   serializedVersion: 4
