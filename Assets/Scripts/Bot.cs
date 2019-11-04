@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bot : Unit
 {
     public GameObject ammo;
-    public GameObject Explousion;
+    public GameObject Explosion;
 
     protected override void InitComponents()
     {
@@ -19,7 +19,7 @@ public class Bot : Unit
 
     void OnDestroy()
     {
-        GameObject exploud = Instantiate(Explousion, transform.position, Quaternion.identity);
-        Destroy(exploud,1);
+        GameObject explode = Instantiate(Explosion, transform.position, Quaternion.identity);
+        Destroy(explode,1);
     }
 }
