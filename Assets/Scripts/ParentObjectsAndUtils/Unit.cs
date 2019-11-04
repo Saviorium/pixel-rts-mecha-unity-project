@@ -6,7 +6,8 @@ using UnityEngine;
 public abstract class Unit : PlayerObject
 {
     public string nameStr = "Unnamed Unit";
-    public List<UnitModule> modules;
+    public List<GameObject> modulesPrefabs;
+    protected List<UnitModule> modules;
 
     protected Queue<Task> taskList;
     protected Task currentTask;
@@ -19,10 +20,16 @@ public abstract class Unit : PlayerObject
         SetColor();                                                                           //но они всё равно сильно связаны между собой - ничего не изменилось
         taskList = new Queue<Task>();
         rigidbody2d = GetComponent<Rigidbody2D>();
+
+        modules = new List<UnitModule>();
         InitComponents();
     }
 
-    protected abstract void InitComponents();
+    protected virtual void InitComponents() {
+        foreach(GameObject module in modulesPrefabs) {
+            modules.Add(module.GetComponent<UnitModule>());
+        }
+    }
 
     protected T AddModule<T>() where T : UnitModule {
         GameObject moduleObj = new GameObject(typeof(T).ToString());
