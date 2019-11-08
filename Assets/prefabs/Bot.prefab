@@ -180,7 +180,7 @@ MonoBehaviour:
   modulesPrefabs:
   - {fileID: 4602148231920390875}
   ammo: {fileID: 3677047588816270042, guid: 23a23f8ce38c6e3468bb6719dc97af20, type: 3}
-  Explousion: {fileID: 8131877620178579220, guid: ba293920568077247868c2e3a3efe8e4,
+  Explosion: {fileID: 8131877620178579220, guid: ba293920568077247868c2e3a3efe8e4,
     type: 3}
 --- !u!50 &1338063336
 Rigidbody2D:
@@ -245,11 +245,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3958760412638106496}
     m_Modifications:
-    - target: {fileID: 8345786830680648162, guid: 492613a7fc6e5bf4cad539465f04e21f,
-        type: 3}
-      propertyPath: m_Name
-      value: Bot Tracks
-      objectReference: {fileID: 0}
     - target: {fileID: 8345786830680648175, guid: 492613a7fc6e5bf4cad539465f04e21f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -304,6 +299,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345786830680648162, guid: 492613a7fc6e5bf4cad539465f04e21f,
+        type: 3}
+      propertyPath: m_Name
+      value: Bot Tracks
       objectReference: {fileID: 0}
     - target: {fileID: 8345786830680648160, guid: 492613a7fc6e5bf4cad539465f04e21f,
         type: 3}

@@ -13,7 +13,7 @@ public class CameraMovement : MonoBehaviour
         
         GetComponent<Camera>().orthographicSize  += Scroll;
         gameObject.transform.position = new Vector3( gameObject.transform.position.x + Horizontal_x, 
-                                                     gameObject.transform.position.y + Vertical_z ,
+                                                     gameObject.transform.position.y - Vertical_z ,
                                                      -10);
     }
 }
