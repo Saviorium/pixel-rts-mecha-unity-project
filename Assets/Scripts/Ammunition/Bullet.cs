@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-
-    public float damage = 1;
-    private float speed = 10f;
-    public GameObject Explousion;
+    private float damageToObjects = 0f;
+    private float damageToUnits = 0f;
+    private float speed = 0f;
+    public GameObject explosionPrefab;
 
     void OnDestroy()
     {
-        GameObject exploud = Instantiate(Explousion, transform.position, Quaternion.identity);
-        Destroy(exploud,1);
+        if(explosionPrefab != null) {
+            GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(explosion, 1);
+        }
     }
 
     void OnCollisionEnter2D (Collision2D other)
     {
-        other.gameObject.GetComponent<PlayerObject>().TakeDamage(damage);
+        other.gameObject.GetComponent<PlayerObject>().TakeDamage(damageToUnits);
         Destroy(gameObject);
     }
 
@@ -26,11 +28,13 @@ public class Bullet : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = target * speed;
     }
 
-    public void AttackTarget(Vector3 direction, float Distance, float damage_to_objects, float damage_to_units)
+    public void AttackTarget(Vector3 direction, float distance, float speed, float damageToObjects, float damageToUnits)
     {
-        damage += damage_to_units;
+        this.damageToUnits   = damageToUnits;
+        this.damageToObjects = damageToObjects;
+        this.speed = speed;
         GetComponent<Rigidbody2D>().velocity = direction * speed;
-        Destroy(gameObject, Distance / speed);
+        Destroy(gameObject, distance / speed);
     }
 
 }
