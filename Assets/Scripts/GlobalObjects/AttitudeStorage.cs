@@ -14,10 +14,10 @@ public class AttitudeStorage : MonoBehaviour
         SetAttitude(2, 1, Attitude.ENEMY);
     }
 
-    public bool IsEnemy(GameObject Attaker, GameObject Target)
+    public bool IsEnemy(GameObject attaker, GameObject target)
     {
-        int attackerTeam = Attaker.GetComponent<PlayerObject>().team;
-        int defenderTeam = Target.GetComponent<PlayerObject>().team;
+        int attackerTeam = attaker.GetComponent<PlayerObject>().team;
+        int defenderTeam = target.GetComponent<PlayerObject>().team;
         return teams[attackerTeam].GetAttitude(defenderTeam) == Attitude.ENEMY;
     }
 

@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class Gun : UnitModule
 {
-    public float damageToObjects;
-    public float damageToUnits;
-    public float fireRate;
-    public float range;
-    protected float accuracy;
+    public float damageToObjects = 10f;
+    public float damageToUnits = 5f;
+    public float fireRate = 5f;
+    public float range = 5f;
+    public float accuracy = 0.15f;
+    public float bulletSpeed = 1f;
     public GameObject ammo;
 
-    private float shotLostTime = 0f; //TODO: add Bullet obj - it should remember it's time, not the gun
+    private float prevShotTime = 0f;
 
     public bool isAgainstSurface;
     public bool isAgainstAir;
+    public bool isTargetAlly = false;
 
     public void Fire(Vector3 direction, Vector3 position)
     {
@@ -25,24 +27,24 @@ public class Gun : UnitModule
                                               new Vector2(Direction.x, Direction.y),
                                               range);
 
-        if (Time.time > (shotLostTime + 1/fireRate))
+        if (Time.time > (prevShotTime + 1/fireRate))
             if (hit.collider != null){
                 if (relationWatcher.IsEnemy(transform.parent.gameObject, hit.collider.gameObject))
                 {
-                    Shoot_ammo(GetCalculatedVector(Direction), position, Distance);
+                    ShootAmmo(GetCalculatedVector(Direction), position, Distance);
                 }
             }
             else
             {
-                Shoot_ammo(GetCalculatedVector(Direction), position, Distance);
+                ShootAmmo(GetCalculatedVector(Direction), position, Distance);
             }
     }
 
-    void Shoot_ammo (Vector3 direction, Vector3 position, float Distance)
+    void ShootAmmo (Vector3 direction, Vector3 position, float Distance)
     {
         GameObject bullet = Instantiate(ammo, position + direction, Quaternion.identity);
-        bullet.GetComponent<Bullet>().AttackTarget(direction, Distance + Random.Range(-accuracy, accuracy)*10, damageToObjects, damageToUnits);
-        shotLostTime = Time.time;
+        bullet.GetComponent<Bullet>().AttackTarget(direction, Distance + Random.Range(-accuracy, accuracy)*10, bulletSpeed, damageToObjects, damageToUnits);
+        prevShotTime = Time.time;
     }
 
     Vector3 GetCalculatedVector(Vector3 Direction )

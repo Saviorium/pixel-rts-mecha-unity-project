@@ -6,36 +6,28 @@ using UnityEngine;
 public abstract class Unit : PlayerObject
 {
     public string nameStr = "Unnamed Unit";
-    public List<GameObject> modulesPrefabs;
-    protected List<UnitModule> modules;
 
     protected Queue<Task> taskList;
     protected Task currentTask;
 
     private Rigidbody2D rigidbody2d;
 
-    void Start() {
+    void Awake() {
         InitSelectionBorder();
         relationWatcher = GameObject.Find("RelationWatcher").GetComponent<AttitudeStorage>(); //FIXME: только 1 Start может быть. Мы типа разделили на 2 файла,
         SetColor();                                                                           //но они всё равно сильно связаны между собой - ничего не изменилось
         taskList = new Queue<Task>();
         rigidbody2d = GetComponent<Rigidbody2D>();
 
-        modules = new List<UnitModule>();
         InitComponents();
     }
 
-    protected virtual void InitComponents() {
-        foreach(GameObject module in modulesPrefabs) {
-            modules.Add(module.GetComponent<UnitModule>());
-        }
-    }
+    protected virtual void InitComponents() {}
 
     protected T AddModule<T>() where T : UnitModule {
         GameObject moduleObj = new GameObject(typeof(T).ToString());
         moduleObj.transform.parent = transform;
         T module = moduleObj.AddComponent<T>();
-        modules.Add(module);
         return module;
     }
 
@@ -128,10 +120,8 @@ public abstract class Unit : PlayerObject
     {
         float speed = 0f;
         float weight = GetWeight();
-        foreach (var module in modules) {
-            if (module is MovingPart) {
-                speed += ((MovingPart)module).GetSpeed(weight);
-            }
+        foreach(var movingPart in GetUnitModules<MovingPart>()) {
+            speed += movingPart.GetSpeed(weight);
         }
         return speed;
     }
@@ -139,7 +129,7 @@ public abstract class Unit : PlayerObject
     private float GetWeight()
     {
         float weight = 0f;
-        foreach (var module in modules) {
+        foreach (var module in GetUnitModules<UnitModule>()) {
             weight += module.weight;
         }
         return weight;
@@ -161,11 +151,13 @@ public abstract class Unit : PlayerObject
 
     private void FireGuns(GameObject attackTarget)
     {
-        foreach (var module in modules) {
-            if (module is Gun) {
-                ((Gun)module).Fire(attackTarget.transform.position - transform.position, transform.position);
-            }
+        foreach (var module in GetUnitModules<Gun>()) {
+            module.Fire(attackTarget.transform.position - transform.position, transform.position);
         }
+    }
+
+    private List<T> GetUnitModules<T>() where T : UnitModule {
+        return new List<T>(GetComponentsInChildren<T>());
     }
 
     public virtual void SetMoveTarget(Vector3 target)
@@ -211,6 +203,7 @@ public abstract class Unit : PlayerObject
     }
 
     public override void TakeDamage(float damage) {
-        modules[UnityEngine.Random.Range(0, modules.Count)].TakeDamage(damage);
+        UnitModule[] modules = GetComponentsInChildren<UnitModule>();
+        modules[UnityEngine.Random.Range(0, modules.Length)].TakeDamage(damage);
     }
 }

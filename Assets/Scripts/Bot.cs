@@ -9,12 +9,8 @@ public class Bot : Unit
 
     protected override void InitComponents()
     {
-        foreach(GameObject module in modulesPrefabs) {
-            modules.Add(module.GetComponent<UnitModule>());
-        }
         AddModule<BotBody>(); //TODO: make other modules as prefabs
         AddModule<Core>();
-        AddModule<Gatling>();
     }
 
     void OnDestroy()
