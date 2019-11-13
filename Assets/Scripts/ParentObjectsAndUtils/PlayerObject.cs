@@ -8,6 +8,7 @@ public class PlayerObject : MonoBehaviour
     protected SpriteRenderer  selectionSprite;
     protected AttitudeStorage relationWatcher;
     public    int             team;
+    public List<Task.TaskType> AvailableTasks; 
 
     protected void SetColor()
     {

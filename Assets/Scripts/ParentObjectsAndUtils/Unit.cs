@@ -18,7 +18,8 @@ public abstract class Unit : PlayerObject
         SetColor();                                                                           //но они всё равно сильно связаны между собой - ничего не изменилось
         taskList = new Queue<Task>();
         rigidbody2d = GetComponent<Rigidbody2D>();
-
+        AvailableTasks = new List<Task.TaskType>();
+        GetAvailableTasks();
         InitComponents();
     }
 
@@ -184,6 +185,7 @@ public abstract class Unit : PlayerObject
     public override void SetSelection(bool isSelected) 
     {
         selectionSprite.enabled = isSelected;
+        if (isSelected) GetAvailableTasks();
     }
 
     public virtual void Die() {
@@ -205,5 +207,15 @@ public abstract class Unit : PlayerObject
     public override void TakeDamage(float damage) {
         UnitModule[] modules = GetComponentsInChildren<UnitModule>();
         modules[UnityEngine.Random.Range(0, modules.Length)].TakeDamage(damage);
+    }
+
+    public void GetAvailableTasks()
+    {
+        AvailableTasks.Clear();
+        foreach (var module in GetUnitModules<UnitModule>())
+        {
+            foreach (var taskType in module.AvailableTasks)
+                AvailableTasks.Add(taskType);
+        }
     }
 }

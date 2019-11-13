@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class GlobalSelectStore : MonoBehaviour
 {
-    private List<GameObject> SelectedObjects;
+    public List<GameObject> SelectedObjects;
     private List<GameObject> SelectedObjects_box;
 
     private Vector3 startPoint = Vector3.zero;
     private Vector3 endPoint = Vector3.zero;
+    private ToolBar ToolBar;
     private LineRenderer lineRenderer;
     // Инициализация всех переменных
     void Start()
     {
         SelectedObjects = new List<GameObject>();
-
+        ToolBar = GameObject.Find("ToolBar").GetComponent<ToolBar>();
         lineRenderer = this.GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
     }
@@ -32,6 +33,7 @@ public class GlobalSelectStore : MonoBehaviour
             {   
                 ClearSelectedItems();
                 SelectUnit(hit.collider.gameObject);
+                ToolBar.DrawTasks();
             }else{
                 ClearSelectedItems();
             }
@@ -87,7 +89,10 @@ public class GlobalSelectStore : MonoBehaviour
             {
                 ClearSelectedItems();
                 foreach(GameObject unit in SelectedObjects_box)
+                {
                     SelectUnit(unit);
+                    ToolBar.DrawTasks();
+                }
             }
 
         }

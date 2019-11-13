@@ -177,8 +177,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: 1
   nameStr: Unnamed Unit
-  modulesPrefabs:
-  - {fileID: 4602148231920390875}
   ammo: {fileID: 3677047588816270042, guid: 23a23f8ce38c6e3468bb6719dc97af20, type: 3}
   Explosion: {fileID: 8131877620178579220, guid: ba293920568077247868c2e3a3efe8e4,
     type: 3}
@@ -219,25 +217,6 @@ CircleCollider2D:
   m_Offset: {x: 0.004326403, y: -0.067059994}
   serializedVersion: 2
   m_Radius: 0.35939032
---- !u!114 &8587222391376500394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4602148231920390875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c66c09709c6ba6246aaf9e61f30a8bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 100
-  weight: 10
-  isCritical: 0
-  addons: []
-  speed: 0
-  weightCarry: 0
-  isFloating: 0
 --- !u!1001 &5479804911201090361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -245,6 +224,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3958760412638106496}
     m_Modifications:
+    - target: {fileID: 8345786830680648162, guid: 492613a7fc6e5bf4cad539465f04e21f,
+        type: 3}
+      propertyPath: m_Name
+      value: Bot Tracks
+      objectReference: {fileID: 0}
     - target: {fileID: 8345786830680648175, guid: 492613a7fc6e5bf4cad539465f04e21f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -300,24 +284,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8345786830680648162, guid: 492613a7fc6e5bf4cad539465f04e21f,
-        type: 3}
-      propertyPath: m_Name
-      value: Bot Tracks
-      objectReference: {fileID: 0}
-    - target: {fileID: 8345786830680648160, guid: 492613a7fc6e5bf4cad539465f04e21f,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 492613a7fc6e5bf4cad539465f04e21f, type: 3}
---- !u!1 &4602148231920390875 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8345786830680648162, guid: 492613a7fc6e5bf4cad539465f04e21f,
-    type: 3}
-  m_PrefabInstance: {fileID: 5479804911201090361}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4602148231920390870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8345786830680648175, guid: 492613a7fc6e5bf4cad539465f04e21f,

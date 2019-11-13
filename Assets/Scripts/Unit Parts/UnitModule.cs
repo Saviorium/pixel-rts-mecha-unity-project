@@ -10,6 +10,7 @@ public class UnitModule : MonoBehaviour
     protected bool isDestroyed = false;
     public bool isCritical = false;
     public List<Addon> addons = new List<Addon>();
+    public List<Task.TaskType> AvailableTasks = new List<Task.TaskType>();
 
     public void TakeDamage(float damage)
     {
