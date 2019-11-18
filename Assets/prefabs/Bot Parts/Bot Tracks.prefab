@@ -129,7 +129,7 @@ MonoBehaviour:
   weight: 10
   isCritical: 0
   addons: []
-  AvailableTasks: 0000000001000000
+  AvailableTasks: 0100000002000000
   speed: 0
   weightCarry: 0
   isFloating: 0

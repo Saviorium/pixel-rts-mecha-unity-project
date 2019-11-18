@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerObject : MonoBehaviour
+public abstract class PlayerObject : MonoBehaviour
 {
 
     protected SpriteRenderer  selectionSprite;
@@ -35,4 +35,7 @@ public class PlayerObject : MonoBehaviour
         selectionSprite = selectionBorder.GetComponent<SpriteRenderer>();
         selectionSprite.enabled = false;
     }
+
+    public abstract void SendAction(Task.TaskType action); 
+    public abstract void SendAction(GlobalSelectStore.ClickType action);
 }

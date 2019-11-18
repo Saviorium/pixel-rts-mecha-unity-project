@@ -6,18 +6,26 @@ public class GlobalSelectStore : MonoBehaviour
 {
     public List<GameObject> SelectedObjects;
     private List<GameObject> SelectedObjects_box;
+    public Task.TaskType Task;
 
     private Vector3 startPoint = Vector3.zero;
     private Vector3 endPoint = Vector3.zero;
     private ToolBar ToolBar;
     private LineRenderer lineRenderer;
+
+    public enum ClickType {
+        LMB,
+        RMB,
+        MMB
+    }
     // Инициализация всех переменных
     void Start()
     {
         SelectedObjects = new List<GameObject>();
-        ToolBar = GameObject.Find("ToolBar").GetComponent<ToolBar>();
+        ToolBar = GameObject.Find("ToolBar").GetComponent<ToolBar>(); // Не работает из-за порядка создания объектов
         lineRenderer = this.GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
+        Task = 0;
     }
 
 
@@ -25,41 +33,27 @@ public class GlobalSelectStore : MonoBehaviour
     {
         // Не забыть переделать с ифной логики
         // При нажаии ЛКМ - если нажал на юнита - селект\деселект, если нажал не на юнита - пока деселект всех юнитов
-        if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit2D  hit = GetHit();
+        if (Input.GetMouseButtonDown(0)){
             startPoint = getMousePos();
-            if (hit.collider != null) 
-            {   
-                ClearSelectedItems();
-                SelectUnit(hit.collider.gameObject);
-                ToolBar.DrawTasks();
-            }else{
-                ClearSelectedItems();
-            }
-        // При нажатии ПКМ - если на юнита - атаковать, если на пустое место - идти
-        }else if (Input.GetMouseButtonDown(1))
-        {
-            RaycastHit2D  hit = GetHit();
-            if (hit.collider != null)
+            if (Task == 0) 
+                foreach (GameObject unit in SelectedObjects)  
+                    unit.GetComponent<PlayerObject>().SendAction(ClickType.LMB);
+            else 
             {
-                foreach (GameObject unit in SelectedObjects)
-                {
-                    if (unit != null)
-                        unit.GetComponent<Unit>().SetAttackTarget(hit.collider.gameObject);
-                    else
-                        SelectedObjects.Remove(unit);
-                }
-            }else{
-                foreach (GameObject unit in SelectedObjects)
-                {
-                    if (unit != null)
-                        unit.GetComponent<Unit>().SetMoveTarget( Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                    else
-                        SelectedObjects.Remove(unit);
-                }
+                foreach (GameObject unit in SelectedObjects)  
+                    unit.GetComponent<PlayerObject>().SendAction(Task);
+                Task = 0;
             }
         }
+        else 
+            if (Input.GetMouseButtonDown(1)) 
+                foreach (GameObject unit in SelectedObjects)  
+                    unit.GetComponent<PlayerObject>().SendAction(ClickType.RMB);
+        else 
+            if (Input.GetMouseButtonDown(2))
+                foreach (GameObject unit in SelectedObjects)  
+                    unit.GetComponent<PlayerObject>().SendAction(ClickType.MMB);
+
 
         // В случае задержки ЛКМ - выделение объектов
         if(Input.GetMouseButton(0)) {
@@ -91,8 +85,8 @@ public class GlobalSelectStore : MonoBehaviour
                 foreach(GameObject unit in SelectedObjects_box)
                 {
                     SelectUnit(unit);
-                    ToolBar.DrawTasks();
                 }
+                GameObject.Find("ToolBar").GetComponent<ToolBar>().DrawTasks();
             }
 
         }

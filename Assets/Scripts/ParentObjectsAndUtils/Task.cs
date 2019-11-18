@@ -13,6 +13,7 @@ public class Task
     }
     
     public enum TaskType {
+        None,
         Move,
         HoldPosition,
         Attack,

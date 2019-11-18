@@ -47,7 +47,7 @@ MonoBehaviour:
   weight: 10
   isCritical: 0
   addons: []
-  AvailableTasks: 04000000
+  AvailableTasks: 05000000
   damageToObjects: -10
   damageToUnits: -10
   fireRate: 5

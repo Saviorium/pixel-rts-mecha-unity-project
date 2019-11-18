@@ -77,6 +77,8 @@ public abstract class Unit : PlayerObject
                 StopMoving();
                 break;
             case Task.TaskType.Attack:
+                if (currentTask.Target.tag == "Untagged")
+                    Destroy(currentTask.Target);
                 StopAttack();
                 break;
             default:
@@ -140,7 +142,7 @@ public abstract class Unit : PlayerObject
     {
         while (target != null) {
             FireGuns(target);
-            StopMoving(); //TODO: attackmove?
+            //StopMoving(); //TODO: attackmove? Атак мув - когда ты указываешь на точку и юнит идет к ней и мочит всех кто попадется, а не возможность атаковать и идти
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -161,12 +163,18 @@ public abstract class Unit : PlayerObject
         return new List<T>(GetComponentsInChildren<T>());
     }
 
-    public virtual void SetMoveTarget(Vector3 target)
+    public virtual GameObject SetMarkOnTarget(Vector3 target)
     {
         target.z = 0f;
         ClearTasks();
         GameObject targetObj = (GameObject)Instantiate(Resources.Load("Move Target"));
         targetObj.transform.position = target;
+        return  targetObj;
+    }
+
+    public virtual void SetMoveTarget(Vector3 target)
+    {
+        GameObject targetObj = SetMarkOnTarget(target);
         Task moveTask = new Task(Task.TaskType.Move, targetObj);
         AddTask(moveTask);
     }
@@ -216,6 +224,43 @@ public abstract class Unit : PlayerObject
         {
             foreach (var taskType in module.AvailableTasks)
                 AvailableTasks.Add(taskType);
+        }
+    }
+
+    
+    public override void SendAction(Task.TaskType action)
+    {
+        if (GetHit().collider != null){
+            Task Task = new Task(action, GetHit().collider.gameObject);
+            AddTask(Task);
+        }else
+        {
+            Task Task = new Task(action, SetMarkOnTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
+            AddTask(Task);
+        }
+    }
+
+    public override void SendAction(GlobalSelectStore.ClickType action)
+    {
+        switch (action)
+        {
+            case GlobalSelectStore.ClickType.LMB: 
+                if (GetHit().collider != null)
+                {
+                    if (GetHit().collider.gameObject  == gameObject) 
+                        SetSelection(true);
+                }
+                else
+                    SetSelection(false);
+                break;
+            case GlobalSelectStore.ClickType.RMB: 
+                if (GetHit().collider != null) 
+                    SetAttackTarget(GetHit().collider.gameObject);
+                else    
+                    SetMoveTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                break;
+            case GlobalSelectStore.ClickType.MMB: 
+                break;
         }
     }
 }

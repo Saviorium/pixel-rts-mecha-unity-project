@@ -29,5 +29,15 @@ public class Building : PlayerObject
         if (health < 0) {
             Destroy(gameObject);
         }
+    }    
+
+    public override void SendAction(Task.TaskType action)
+    {
+
+    }
+
+    public override void SendAction(GlobalSelectStore.ClickType action)
+    {
+
     }
 }
